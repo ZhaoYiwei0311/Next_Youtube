@@ -1,9 +1,24 @@
-import Image from 'next/image';
 
-export default function Home() {
+// <-- hooks can only be used in client components
+import { HydrateClient, trpc } from "@/trpc/server";
+import { PageClient } from "./client";
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+
+export default async function Home() {
+
+  void trpc.hello.prefetch({text: "a"});
   return (
     <div>
-      <p className="text-xl font-semibold tracking-tight">I will load videos in the future</p>
+      <HydrateClient>
+        <Suspense fallback="loading...">
+          <ErrorBoundary fallback={<p>error...</p>}>
+            <PageClient />
+
+          </ErrorBoundary>
+        </Suspense>
+
+      </HydrateClient>
     </div>
-  );
+  )
 }
