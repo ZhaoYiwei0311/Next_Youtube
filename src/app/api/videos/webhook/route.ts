@@ -83,11 +83,11 @@ export const POST = async (request: Request) => {
                 .update(videos)
                 .set({
                     muxStatus: data.status,
-                    muxUploadId: playbackId,
+                    muxPlaybackId: playbackId,
                     muxAssetId: data.id,
                     thumbnailUrl,
                     previewUrl,
-                    duration
+                    duration,
                 })
                 .where(eq(videos.muxUploadId, data.upload_id))
             break;    
