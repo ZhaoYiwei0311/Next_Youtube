@@ -6,8 +6,46 @@ import { mux } from "@/lib/mux";
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
 import { TRPCError } from "@trpc/server";
 import { eq, and } from "drizzle-orm";
+import { workflow } from "@/lib/workflow";
+import { Input } from "postcss";
 
 export const videosRouter = createTRPCRouter({
+    generateThumbnail: protectedProcedure
+        .input(z.object({ id: z.string().uuid(), prompt: z.string().min(10) }))
+        .mutation(async ({ ctx, input }) => {
+            const { id: userId } = ctx.user;
+
+            const { workflowRunId } = await workflow.trigger({
+                url: `${process.env.UPSTASH_WORKFLOW_URL}/api/videos/workflows/thumbnail`,
+                body: { userId, videoId: input.id, prompt: input.prompt },
+                retries: 3
+
+            });
+        }),
+    generateDescription: protectedProcedure
+        .input(z.object({ id: z.string().uuid()}))
+        .mutation(async ({ ctx, input }) => {
+            const { id: userId } = ctx.user;
+
+            const { workflowRunId } = await workflow.trigger({
+                url: `${process.env.UPSTASH_WORKFLOW_URL}/api/videos/workflows/description`,
+                body: { userId, videoId: input.id },
+                retries: 3
+
+            });
+        }),
+    generateTitle: protectedProcedure
+        .input(z.object({ id: z.string().uuid() }))
+        .mutation(async ({ ctx, input }) => {
+            const { id: userId } = ctx.user;
+
+            const { workflowRunId } = await workflow.trigger({
+                url: `${process.env.UPSTASH_WORKFLOW_URL}/api/videos/workflows/title`,
+                body: { userId, videoId: input.id },
+                retries: 3
+
+            });
+        }),
     restoreThumbnail: protectedProcedure
         .input(z.object({ id: z.string().uuid() }))
         .mutation(async ({ ctx, input }) => {
@@ -141,7 +179,7 @@ export const videosRouter = createTRPCRouter({
             .insert(videos)
             .values({
                 userId: userId,
-                title: "a",
+                title: "untitled",
                 muxStatus: "waiting",
                 muxUploadId: upload.id
 
