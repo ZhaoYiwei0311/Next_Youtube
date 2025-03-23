@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { db } from "@/db";
 import { UTApi } from "uploadthing/server";
-import { videos, videoUpdateSchema, users } from "@/db/schema"
+import { videos, videoUpdateSchema, users, videoViews } from "@/db/schema"
 import { mux } from "@/lib/mux";
 import { baseProcedure, createTRPCRouter, protectedProcedure } from "@/trpc/init";
 import { TRPCError } from "@trpc/server";
@@ -18,7 +18,8 @@ export const videosRouter = createTRPCRouter({
                     ...getTableColumns(videos),
                     user: {
                         ...getTableColumns(users)
-                    }
+                    },
+                    viewCount: db.$count(videoViews, eq(videoViews.videoId, videos.id))
                 })
                 .from(videos)
                 .where(eq(videos.id, input.id))
