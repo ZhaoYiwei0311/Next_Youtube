@@ -6,14 +6,14 @@ interface InfiniteScrollProps {
     isManual?: boolean;
     hasNextPage: boolean;
     isFetchingNextPage: boolean;
-    fecthNextPage: () => void;
+    fetchNextPage: () => void;
 }
 
 export const InfiniteScroll = ({
     isManual = false,
     hasNextPage,
     isFetchingNextPage,
-    fecthNextPage,
+    fetchNextPage,
 }: InfiniteScrollProps) => {
     const { targetRef, isIntersecting } = useIntersectionObserver({
         threshold: 0.5,
@@ -22,7 +22,7 @@ export const InfiniteScroll = ({
 
     useEffect(() => {
         if (isIntersecting && hasNextPage && !isFetchingNextPage && !isManual) {
-            fecthNextPage();
+            fetchNextPage();
         }
     }, [isIntersecting, hasNextPage, isFetchingNextPage])
 
@@ -33,7 +33,7 @@ export const InfiniteScroll = ({
                 <Button
                     variant="secondary"
                     disabled={!hasNextPage || isFetchingNextPage}
-                    onClick={() => fecthNextPage()}
+                    onClick={() => fetchNextPage()}
                 >
                     {isFetchingNextPage ? "Loading..." : "Load more"}
                 </Button>

@@ -58,7 +58,7 @@ const CommentsSectionSuspense = ({ videoId }: CommentsSectionProps) => {
                         isManual={true}
                         hasNextPage={query.hasNextPage}
                         isFetchingNextPage={query.isFetchingNextPage}
-                        fecthNextPage={query.fetchNextPage}
+                        fetchNextPage={query.fetchNextPage}
                     />
                 </div>
             </div>

@@ -13,12 +13,18 @@ import { useUser, useClerk } from "@clerk/nextjs";
 
 interface CommentFormProps {
     videoId: string;
+    parentId?: string;
+    variant?: "comment" | "reply";
     onSuccess?: () => void;
+    onCancel?: () => void;
 };
 
 export const CommentForm = ({
     videoId,
-    onSuccess
+    parentId,
+    onSuccess,
+    onCancel,
+    variant = "comment",
 }: CommentFormProps) => {
     const { user } = useUser();
 
@@ -28,6 +34,7 @@ export const CommentForm = ({
     const create = trpc.comments.create.useMutation({
         onSuccess: () => {
             utils.comments.getMany.invalidate({ videoId });
+            utils.comments.getMany.invalidate({ videoId, parentId });
             form.reset();
             toast.success("Comment added");
             onSuccess?.();
@@ -46,6 +53,7 @@ export const CommentForm = ({
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
+            parentId: parentId,
             videoId: videoId,
             value: "",
         },
@@ -53,6 +61,12 @@ export const CommentForm = ({
 
     const handleSubmit = (values: z.infer<typeof formSchema>) => {
         create.mutate(values);
+    }
+
+    const handleCancel = () => {
+        form.reset();
+        onCancel?.();
+
     }
 
     return (
@@ -75,6 +89,7 @@ export const CommentForm = ({
                                 <FormControl>
                                     <Textarea
                                         {...field}
+                                        placeholder={variant === "reply" ? "Reply to this comment..." : "Add a comment..."}
                                         className="resize-none bg-transparent overflow-hidden min-h-0"
                                     />
                                 </FormControl>
@@ -83,12 +98,21 @@ export const CommentForm = ({
                         )}
                     />
                     <div className="justify-end gap-2 mt-2 flex">
+                        {onCancel && (
+                            <Button 
+                                variant="ghost"
+                                size="sm"
+                                onClick={handleCancel}
+                            >
+                                Cancel
+                            </Button>
+                        )}
                         <Button
                             disabled={create.isPending}
                             type="submit"
                             size="sm"
                         >
-                            Comment
+                            {variant === "reply" ? "Reply" : "Comment"}
                         </Button>
                     </div>
                 </div>

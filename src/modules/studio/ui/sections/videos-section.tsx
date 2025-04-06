@@ -176,7 +176,7 @@ const VideosSectionSuspense = () => {
                 isManual
                 hasNextPage={query.hasNextPage}
                 isFetchingNextPage={query.isFetchingNextPage}
-                fecthNextPage={query.fetchNextPage}
+                fetchNextPage={query.fetchNextPage}
             />
 
         </div>
