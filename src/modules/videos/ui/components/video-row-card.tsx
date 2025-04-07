@@ -14,7 +14,7 @@ import { UserAvatar } from "@/components/user-avatar";
 import { UserInfo } from "@/modules/users/ui/components/user-info";
 
 import { VideoMenu } from "./video-menu";
-import { VideoThumbnail } from "./video-thumbnail";
+import { VideoThumbnail, VideoThumbnailSkeleton } from "./video-thumbnail";
 import { VideoGetManyOutput } from "../../types";
 
 const videoRowCardVariants = cva("group flex min-w-0", {
@@ -46,18 +46,47 @@ interface VideoRowCardProps extends VariantProps<typeof videoRowCardVariants> {
     data: VideoGetManyOutput["items"][number];
     onRemove?: () => void;
 };
+type VideoRowCardSkeletonProps = VariantProps<typeof videoRowCardVariants>;
 
-export const VideoRowCardSkeleton = () => {
+
+export const VideoRowCardSkeleton = ({ size = "default" }: VideoRowCardSkeletonProps) => {
     return (
-        <div>
-            <Skeleton />
+        <div className={videoRowCardVariants({ size })}>
+            <div className={thumbnailVariants({ size })}>
+                <VideoThumbnailSkeleton />
+            </div>
+
+
+            <div className="flex-1 min-w-0">
+                <div className="flex gap-x-2 justify-between">
+                    <div className="flex-1 min-w-0">
+                        <Skeleton
+                            className={cn("h-5 w-[40%]", size === "compact" && "h-4 w-[40%]")}
+                        />
+                        {size === "default" && (
+                            <>
+                                <Skeleton className="h-4 w-[20%] mt-1" />
+                                <div className="flex items-center gap-2 my-3">
+                                    <Skeleton className="size-8 rounded-full" />
+                                    <Skeleton className="h-4 w-24" />
+                                </div>
+                            </>
+                        )}
+                        {size === "compact" && (
+                            <>
+                                <Skeleton className="h-4 w-[50%] mt-1" />
+                            </>
+                        )}
+                    </div>
+                </div>
+            </div>
         </div>
     )
 };
 
 export const VideoRowCard = ({
     data,
-    size,
+    size = "default",
     onRemove
 }: VideoRowCardProps) => {
     const compactViews = useMemo(() => {
@@ -109,23 +138,21 @@ export const VideoRowCard = ({
                                         name={data.user.name}
                                     />
                                     <UserInfo size="sm" name={data.user.name} />
-                                    <Tooltip>
-                                        <TooltipTrigger asChild>
-                                            <p className="text-xs text-muted-foreground line-clamp-2">
-                                                {data.description ?? "No description"}
-                                            </p>
-                                        </TooltipTrigger>
-                                        <TooltipContent
-                                            side="bottom"
-                                            align="center"
-                                            className="bg-black/70"
-                                        >
-                                            <p>From the video description</p>
-                                        </TooltipContent>
-
-                                    </Tooltip>
-
                                 </div>
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <p className="text-xs text-muted-foreground w-fit line-clamp-2">
+                                            {data.description ?? "No description"}
+                                        </p>
+                                    </TooltipTrigger>
+                                    <TooltipContent
+                                        side="bottom"
+                                        align="center"
+                                        className="bg-black/70"
+                                    >
+                                        <p>From the video description</p>
+                                    </TooltipContent>
+                                </Tooltip>
                             </>
                         )}
                         {size === "compact" && (

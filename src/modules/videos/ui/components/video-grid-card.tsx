@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 // import { VideoInfo, VideoInfoSkeleton } from "./video-info";
-import { VideoThumbnail } from "./video-thumbnail";
+import { VideoThumbnail, VideoThumbnailSkeleton } from "./video-thumbnail";
 import { VideoGetManyOutput } from "../../types";
 import { VideoInfo, VideoInfoSkeleton } from "./video-info";
 
@@ -13,7 +13,7 @@ interface VideoGridCardProps {
 export const VideoGridCardSkeleton = () => {
   return (
     <div className="flex flex-col gap-2 w-full">
-      {/* <VideoThumbnailSkeleton /> */}
+      <VideoThumbnailSkeleton />
       <VideoInfoSkeleton />
     </div>
   );
