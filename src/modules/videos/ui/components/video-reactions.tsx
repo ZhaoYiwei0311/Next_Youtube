@@ -26,8 +26,11 @@ export const VideoReactions = ({
     const utils = trpc.useUtils();
 
     const like = trpc.videoReactions.like.useMutation({
+
         onSuccess: () => {
             utils.videos.getOne.invalidate({ id: videoId });
+            utils.playLists.getLiked.invalidate();
+
         },
         onError: (error) => {
             toast.error("Something went wrong");
@@ -40,6 +43,7 @@ export const VideoReactions = ({
     const dislike = trpc.videoReactions.dislike.useMutation({
         onSuccess: () => {
             utils.videos.getOne.invalidate({ id: videoId });
+            utils.playLists.getLiked.invalidate();
         },
         onError: (error) => {
             toast.error("Something went wrong");
@@ -61,7 +65,7 @@ export const VideoReactions = ({
                 <ThumbsUpIcon className={cn("size-5", viewerReaction === "like" && "fill-black")} />
                 {likes}
             </Button>
-            <Separator orientation="vertical" className="h-7"/>
+            <Separator orientation="vertical" className="h-7" />
             <Button
                 onClick={() => dislike.mutate({ videoId })}
                 disabled={like.isPending || dislike.isPending}

@@ -23,8 +23,7 @@ function getUrl() {
   const base = (() => {
     if (typeof window !== 'undefined') return '';
     // TODO: Modify for outside-Vervel depolyment
-    if (APP_URL) return `https://${APP_URL}`;
-    return 'http://localhost:3000';
+    return APP_URL;
   })();
   return `${base}/api/trpc`;
 }

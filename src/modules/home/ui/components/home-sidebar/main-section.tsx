@@ -11,6 +11,7 @@ import {
     SidebarMenuItem } from "@/components/ui/sidebar";
 
 import { FlameIcon, HomeIcon, PlaySquareIcon } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 
 
@@ -22,13 +23,13 @@ const items = [
     },
     {
         title: "Subscriptions",
-        url: "feed/subscriptions",
+        url: "/feed/subscribed",
         icon: PlaySquareIcon,
         auth: true,
     },
     {
         title: "Trending",
-        url: "feed/trending",
+        url: "/feed/trending",
         icon: FlameIcon,
     },
 
@@ -38,6 +39,8 @@ export const MainSection = () => {
     const clerk = useClerk();
 
     const { isSignedIn } = useAuth();
+    const pathname = usePathname();
+
     return (
         <SidebarGroup>
             <SidebarGroupContent>
@@ -47,7 +50,7 @@ export const MainSection = () => {
                             <SidebarMenuButton
                                 tooltip={item.title}
                                 asChild
-                                isActive={false}
+                                isActive={pathname === item.url}
                                 onClick={(e) => {
                                     if (item.auth && !isSignedIn) {
                                         e.preventDefault();

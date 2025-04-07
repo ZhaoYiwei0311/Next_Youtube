@@ -13,6 +13,7 @@ import {
     SidebarMenuItem } from "@/components/ui/sidebar";
 
 import { HistoryIcon, ThumbsUpIcon, ListVideoIcon } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 
 
@@ -25,7 +26,7 @@ const items = [
     },
     {
         title: "Liked Videos",
-        url: "/playlists/liked-videos",
+        url: "/playlists/liked",
         icon: ThumbsUpIcon,
         auth: true,
     },
@@ -42,6 +43,7 @@ export const PersonalSection = () => {
     const clerk = useClerk();
 
     const { isSignedIn } = useAuth();
+    const pathname = usePathname();
     return (
         <SidebarGroup>
             <SidebarGroupContent>
@@ -51,7 +53,7 @@ export const PersonalSection = () => {
                             <SidebarMenuButton
                                 tooltip={item.title}
                                 asChild
-                                isActive={false}
+                                isActive={pathname === item.url}
                                 onClick={(e) => {
                                     if (item.auth && !isSignedIn) {
                                         e.preventDefault();
