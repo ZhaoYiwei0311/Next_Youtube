@@ -2,7 +2,7 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { CommentsGetManyOutput } from "../../types";
 import { UserAvatar } from "@/components/user-avatar";
-import { add, formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow } from "date-fns";
 import { trpc } from "@/trpc/client";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";

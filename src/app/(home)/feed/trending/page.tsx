@@ -1,7 +1,7 @@
 
 // <-- hooks can only be used in client components
 import { HydrateClient, trpc } from "@/trpc/server";
-import { HomeView } from "@/modules/home/ui/views/home-view";
+
 import { DEFAULT_LIMIT } from "@/constants";
 import { TrendingView } from "@/modules/home/ui/views/trending-view";
 

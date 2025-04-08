@@ -1,11 +1,11 @@
 import { z } from "zod";
 import { db } from "@/db";
 
-import { videos, videoUpdateSchema, users, videoViews, videoReactions, subscriptions } from "@/db/schema"
+import { videos, users, subscriptions } from "@/db/schema"
 
-import { baseProcedure, createTRPCRouter, protectedProcedure } from "@/trpc/init";
+import { baseProcedure, createTRPCRouter } from "@/trpc/init";
 import { TRPCError } from "@trpc/server";
-import { eq, and, getTableColumns, inArray, isNotNull, or, lt, desc } from "drizzle-orm";
+import { eq,  getTableColumns, inArray, isNotNull } from "drizzle-orm";
 
 
 export const usersRouter = createTRPCRouter({

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import { ListEnd, ThumbsUpIcon } from "lucide-react";
+import { ThumbsUpIcon } from "lucide-react";
 
 import { VideoGetOneOutput } from "../../types";
 import { useClerk } from "@clerk/nextjs";

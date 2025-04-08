@@ -1,11 +1,11 @@
 import { z } from "zod";
 import { db } from "@/db";
 
-import { videos, videoUpdateSchema, users, videoViews, videoReactions, playlists, playlistVideos } from "@/db/schema"
+import { videos, users, videoViews, videoReactions, playlists, playlistVideos } from "@/db/schema"
 
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
 
-import { eq, and, getTableColumns, inArray, isNotNull, or, lt, desc, sql } from "drizzle-orm";
+import { eq, and, getTableColumns, or, lt, desc, sql } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 
 

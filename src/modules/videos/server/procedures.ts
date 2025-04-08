@@ -300,6 +300,8 @@ export const videosRouter = createTRPCRouter({
                 retries: 3
 
             });
+            return workflowRunId;
+
         }),
     generateDescription: protectedProcedure
         .input(z.object({ id: z.string().uuid() }))
@@ -312,6 +314,8 @@ export const videosRouter = createTRPCRouter({
                 retries: 3
 
             });
+
+            return workflowRunId;
         }),
     generateTitle: protectedProcedure
         .input(z.object({ id: z.string().uuid() }))
@@ -324,6 +328,8 @@ export const videosRouter = createTRPCRouter({
                 retries: 3
 
             });
+
+            return workflowRunId;
         }),
     revalidate: protectedProcedure
         .input(z.object({ id: z.string().uuid() }))

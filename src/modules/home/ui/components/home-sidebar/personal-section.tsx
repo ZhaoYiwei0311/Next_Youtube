@@ -9,7 +9,6 @@ import {
     SidebarMenu, 
     SidebarGroup,
     SidebarMenuButton,
-    SidebarGroupLabel,
     SidebarMenuItem } from "@/components/ui/sidebar";
 
 import { HistoryIcon, ThumbsUpIcon, ListVideoIcon } from "lucide-react";

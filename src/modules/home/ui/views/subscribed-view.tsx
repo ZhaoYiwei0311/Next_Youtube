@@ -1,5 +1,4 @@
 
-import { HomeVideosSection } from "../sections/home-videos-section";
 import { SubscribedVideosSection } from "../sections/subscribed-videos-section copy";
 
 
