@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next_Youtube 🎬
 
-## Getting Started
+A modern, full-stack [Next.js](https://nextjs.org) project inspired by YouTube, built to showcase real-time video streaming, AI-powered features, and scalable cloud architecture.
 
-First, run the development server:
+## 🚀 Getting Started (Local Development)
+
+To start the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun run dev:all
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open your browser and visit:  
+👉 [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> You can begin development by editing the `app/page.tsx` file. The page supports **hot reload**, so changes will reflect instantly.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Tech Stack
 
-## Learn More
+| Layer      | Tech                                   |
+|------------|----------------------------------------|
+| Frontend   | [Next.js](https://nextjs.org), [Tailwind CSS](https://tailwindcss.com) |
+| Backend    | [tRPC](https://trpc.io), Next.js API Routes |
+| Database   | PostgreSQL, Redis                      |
+| Media      | [Mux](https://www.mux.com/) (Video hosting & streaming) |
+| Webhooks   | [Ngrok](https://ngrok.com)             |
+| Cloud      | [Vercel](https://vercel.com)           |
+| AI         | [OpenAI API](https://platform.openai.com) |
 
-To learn more about Next.js, take a look at the following resources:
+## 🌐 Live Demo
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The project is live on Vercel:  
+👉 [next-youtube.vercel.app](https://next-youtube-5h8q-bgp2z9tpy-yiweizhao0311s-projects.vercel.app/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🖋️ Fonts
 
-## Deploy on Vercel
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) for font optimization.  
+It includes the [Geist](https://vercel.com/font) font by Vercel for a clean, modern look.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📦 Deployment on Vercel
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+To deploy this project to Vercel:
+
+1. Push your code to GitHub/GitLab.
+2. Connect your repository on [Vercel Dashboard](https://vercel.com).
+3. Set build command (in project settings):
+   ```
+   Build Command: bun run build
+   Install Command: bun install
+   ```
+
+---
+
+### 🙌 Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you’d like to change.
+
+---
+
+### 📄 License
+
+[MIT](LICENSE)
+
+---
+
+Made with ❤️ by YiweiZhao0311
