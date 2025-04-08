@@ -3,7 +3,7 @@ import { DEFAULT_LIMIT } from "@/constants";
 import { LikedView } from "@/modules/playlists/ui/views/liked-view";
 
 const Page = async () => {
-    void trpc.playLists.getLiked.prefetchInfinite({
+    void trpc.playlists.getLiked.prefetchInfinite({
         limit: DEFAULT_LIMIT,
     });
 

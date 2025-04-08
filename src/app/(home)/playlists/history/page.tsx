@@ -3,7 +3,7 @@ import { DEFAULT_LIMIT } from "@/constants";
 import { HistoryView } from "@/modules/playlists/ui/views/history-view";
 
 const Page = async () => {
-    void trpc.playLists.getManyHistory.prefetchInfinite({
+    void trpc.playlists.getManyHistory.prefetchInfinite({
         limit: DEFAULT_LIMIT,
     });
 

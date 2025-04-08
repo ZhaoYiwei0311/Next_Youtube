@@ -120,7 +120,8 @@ export const videoRelations = relations(videos, ({ one, many }) => ({
     }),
     views: many(videoViews),
     reactions: many(videoReactions),
-    comments: many(comments)
+    comments: many(comments),
+    playlistVideos: many(playlistVideos),
 }));
 
 export const comments = pgTable("comments", {
@@ -162,7 +163,6 @@ export const commentRelations = relations(comments, ({ one, many }) => ({
         relationName: "comments_parent_id_fkey",
     }),
 }))
-
 
 
 export const commentsInsertSchema = createInsertSchema(comments);
@@ -244,6 +244,7 @@ export const playlistVideoRelations = relations(playlistVideos, ({ one }) => ({
         references: [videos.id],
     })
 }));
+
 
 export const playlists = pgTable("playlists", {
     id: uuid("id").primaryKey().defaultRandom(),
